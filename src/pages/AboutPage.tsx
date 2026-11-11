@@ -1,8 +1,16 @@
+import aboutTemplate from "../templates/about.html?raw"
+import { renderTemplate } from "../utils/renderTemplate"
+
 export default function AboutPage() {
+  const html = renderTemplate(aboutTemplate, {
+    title: "서비스 소개",
+    description: "편지를 작성하고 확인할 수 있는 서비스입니다.",
+    year: new Date().getFullYear(),
+  })
+
   return (
     <main>
-      <h1>서비스 소개</h1>
-      <p>이곳은 편지 작성과 독립된 소개 페이지입니다.</p>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
     </main>
   )
 }

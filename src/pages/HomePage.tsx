@@ -1,9 +1,27 @@
+import { useState } from "react"
+import homeTemplate from "../templates/home.html?raw"
+import { renderTemplate } from "../utils/renderTemplate"
+
+
 export default function HomePage() {
+  const [name, setName] = useState("유성")
+
+  const html = renderTemplate(homeTemplate, {
+    title : "home",
+    name : name || "visitor",
+  })
+
   return (
     <main>
-      <h1>홈</h1>
-      <p>서비스의 첫 화면입니다.</p>
-      <p>상단 메뉴에서 편지 작성이나 소개 페이지로 이동하세요.</p>
+      <label htmlFor="home-name">표시할 이름</label>
+
+      <input
+        id="home-name"
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+      />
+
+      <div dangerouslySetInnerHTML={{ __html: html }} />
     </main>
   )
 }
